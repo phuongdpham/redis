@@ -2,6 +2,7 @@ package redis
 
 import (
 	"context"
+	"github.com/go-session/session/v3"
 	"testing"
 	"time"
 
@@ -20,7 +21,12 @@ func TestStore(t *testing.T) {
 			DB:   db,
 		},
 	)
-	defer mstore.Close()
+	defer func(mstore session.ManagerStore) {
+		err := mstore.Close()
+		if err != nil {
+
+		}
+	}(mstore)
 
 	Convey("Test redis storage operation", t, func() {
 		store, err := mstore.Create(context.Background(), "test_redis_store", 10)
@@ -65,7 +71,12 @@ func TestManagerStore(t *testing.T) {
 			DB:   db,
 		},
 	)
-	defer mstore.Close()
+	defer func(mstore session.ManagerStore) {
+		err := mstore.Close()
+		if err != nil {
+
+		}
+	}(mstore)
 
 	Convey("Test redis-based storage management operations", t, func() {
 		sid := "test_manager_store"
@@ -114,7 +125,12 @@ func TestStoreWithExpired(t *testing.T) {
 			DB:   db,
 		},
 	)
-	defer mstore.Close()
+	defer func(mstore session.ManagerStore) {
+		err := mstore.Close()
+		if err != nil {
+
+		}
+	}(mstore)
 
 	Convey("Test Redis Store Expiration", t, func() {
 		sid := "test_store_expired"

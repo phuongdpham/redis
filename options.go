@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	redis "github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 // Options Redis parameter options
@@ -71,22 +71,20 @@ type Options struct {
 
 func (o *Options) redisOptions() *redis.Options {
 	return &redis.Options{
-		Network:            o.Network,
-		Addr:               o.Addr,
-		Dialer:             o.Dialer,
-		Password:           o.Password,
-		DB:                 o.DB,
-		MaxRetries:         o.MaxRetries,
-		MinRetryBackoff:    o.MinRetryBackoff,
-		MaxRetryBackoff:    o.MaxRetryBackoff,
-		DialTimeout:        o.DialTimeout,
-		ReadTimeout:        o.ReadTimeout,
-		WriteTimeout:       o.WriteTimeout,
-		PoolSize:           o.PoolSize,
-		PoolTimeout:        o.PoolTimeout,
-		IdleTimeout:        o.IdleTimeout,
-		IdleCheckFrequency: o.IdleCheckFrequency,
-		TLSConfig:          o.TLSConfig,
+		Network:         o.Network,
+		Addr:            o.Addr,
+		Dialer:          o.Dialer,
+		Password:        o.Password,
+		DB:              o.DB,
+		MaxRetries:      o.MaxRetries,
+		MinRetryBackoff: o.MinRetryBackoff,
+		MaxRetryBackoff: o.MaxRetryBackoff,
+		DialTimeout:     o.DialTimeout,
+		ReadTimeout:     o.ReadTimeout,
+		WriteTimeout:    o.WriteTimeout,
+		PoolSize:        o.PoolSize,
+		PoolTimeout:     o.PoolTimeout,
+		TLSConfig:       o.TLSConfig,
 	}
 }
 
@@ -122,30 +120,26 @@ type ClusterOptions struct {
 	WriteTimeout time.Duration
 
 	// PoolSize applies per cluster node and not for the whole cluster.
-	PoolSize           int
-	PoolTimeout        time.Duration
-	IdleTimeout        time.Duration
-	IdleCheckFrequency time.Duration
+	PoolSize    int
+	PoolTimeout time.Duration
 }
 
 func (o *ClusterOptions) redisClusterOptions() *redis.ClusterOptions {
 	return &redis.ClusterOptions{
-		Addrs:              o.Addrs,
-		MaxRedirects:       o.MaxRedirects,
-		ReadOnly:           o.ReadOnly,
-		RouteByLatency:     o.RouteByLatency,
-		RouteRandomly:      o.RouteRandomly,
-		OnConnect:          o.OnConnect,
-		MaxRetries:         o.MaxRetries,
-		MinRetryBackoff:    o.MinRetryBackoff,
-		MaxRetryBackoff:    o.MaxRetryBackoff,
-		Password:           o.Password,
-		DialTimeout:        o.DialTimeout,
-		ReadTimeout:        o.ReadTimeout,
-		WriteTimeout:       o.WriteTimeout,
-		PoolSize:           o.PoolSize,
-		PoolTimeout:        o.PoolTimeout,
-		IdleTimeout:        o.IdleTimeout,
-		IdleCheckFrequency: o.IdleCheckFrequency,
+		Addrs:           o.Addrs,
+		MaxRedirects:    o.MaxRedirects,
+		ReadOnly:        o.ReadOnly,
+		RouteByLatency:  o.RouteByLatency,
+		RouteRandomly:   o.RouteRandomly,
+		OnConnect:       o.OnConnect,
+		MaxRetries:      o.MaxRetries,
+		MinRetryBackoff: o.MinRetryBackoff,
+		MaxRetryBackoff: o.MaxRetryBackoff,
+		Password:        o.Password,
+		DialTimeout:     o.DialTimeout,
+		ReadTimeout:     o.ReadTimeout,
+		WriteTimeout:    o.WriteTimeout,
+		PoolSize:        o.PoolSize,
+		PoolTimeout:     o.PoolTimeout,
 	}
 }
